@@ -13,7 +13,7 @@ class Group {
 
   add(val) {
     if (!this.has(val)) { //adds a value to the group
-      this.array.push(val); 
+      this.array.push(val);
     }
   }
 
@@ -32,15 +32,31 @@ class Group {
     } //takes an iterable object as argument and creates a group that contains all the values produced by iterating over it.
     return group;
   }
-
-  
 }
+class GroupIterator {
+  constructor(group) {
+    this.group = group;
+    this.position = 0;
+  }
 
+  next() {
+    if (this.position >= this.group.array.length) {
+      return { done: true };
+    } else {
+      let result = {
+        val: this.group.array[this.position],
+        done: false
+      };
+      this.position++;
+      return result;
+    }
+  }
+}
 
 // Tests:
 for (let value of Group.from(["a", "b", "c"])) {
-    console.log(value);
-  }
-  // → a
-  // → b
-  // → c
+  console.log(value);
+}
+// → a
+// → b
+// → c
